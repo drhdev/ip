@@ -7,21 +7,18 @@
     document.addEventListener('DOMContentLoaded', () => {
       const domain = window.location.hostname;
       document.title = domain + " | IP Info";
+
+      fetch('ip.php')
+        .then(response => response.json())
+        .then(data => {
+          document.body.innerText = JSON.stringify(data, null, 2);
+        })
+        .catch(error => {
+          document.body.innerText = JSON.stringify({ error: error.message });
+        });
     });
   </script>
 </head>
 <body>
-  <script>
-    const screenResolution = `${window.screen.width}x${window.screen.height}`;
-
-    fetch(`ip.php?screen=${encodeURIComponent(screenResolution)}`)
-      .then(response => response.json())
-      .then(data => {
-        document.body.innerText = JSON.stringify(data, null, 2);
-      })
-      .catch(error => {
-        document.body.innerText = JSON.stringify({ error: error.message });
-      });
-  </script>
 </body>
 </html>

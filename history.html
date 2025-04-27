@@ -7,22 +7,18 @@
     document.addEventListener('DOMContentLoaded', () => {
       const domain = window.location.hostname;
       document.title = domain + " | History";
+
+      fetch('ip.php?history')
+        .then(response => response.json())
+        .then(data => {
+          document.body.innerHTML = '<h1>Last 10 Calls</h1><pre>' + JSON.stringify(data, null, 2) + '</pre>';
+        })
+        .catch(error => {
+          document.body.innerText = JSON.stringify({ error: error.message });
+        });
     });
   </script>
 </head>
 <body>
-  <h1>Last 10 Calls</h1>
-  <pre id="output">Loading...</pre>
-
-  <script>
-    fetch('ip.php?history')
-      .then(response => response.json())
-      .then(data => {
-        document.getElementById('output').innerText = JSON.stringify(data, null, 2);
-      })
-      .catch(error => {
-        document.getElementById('output').innerText = JSON.stringify({ error: error.message });
-      });
-  </script>
 </body>
 </html>
