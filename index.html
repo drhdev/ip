@@ -1,8 +1,14 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>IP Info</title>
+  <title>Loading...</title>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const domain = window.location.hostname;
+      document.title = domain + " | IP Info";
+    });
+  </script>
 </head>
 <body>
   <script>
